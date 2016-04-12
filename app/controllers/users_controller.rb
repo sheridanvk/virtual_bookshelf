@@ -28,9 +28,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created. Processing bookshelf' }
-        format.json { render :show, status: :created, location: @user }
         build_bookshelf
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -74,6 +74,20 @@ class UsersController < ApplicationController
     end
 
     def build_bookshelf
-      @user.goodreads_id
+      goodreads_client = Goodreads::Client.new(api_key: ENV['GOODREADS_API_KEY'],api_secret: ENV['GOODREADS_API_SECRET'])
+      page_number = 1
+
+      loop do
+        puts page_number
+        bookshelf = goodreads_client.shelf(@user.goodreads_id, 'read', {page:page_number})
+
+        bookshelf.books.each do |item|
+          @user.books.create(title: item.fetch("book").fetch("title"),
+          isbn: item.fetch("book").fetch("isbn"))
+        end
+
+        break if bookshelf.total <= bookshelf.end
+        page_number += 1
+      end
     end
 end
