@@ -10,13 +10,20 @@
   <%= @user.goodreads_id %>
 </p>
 
-<table>
-<% @user.books.each do |book| %>
-  <tr>
-    <td><%= book.title %></td>
-  </tr>
-<% end %>
-</table>
+<div class="bookshelf">
+  <% @user.books.each do |book| %>
+    <div class="book">
+      <div class="rotate">
+        <%= book.title %> <br/>
+        <%= book.author %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<p>
+  <br/>
+  <br/>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Back', users_path %>
+</p>

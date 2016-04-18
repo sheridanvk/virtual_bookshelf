@@ -3,13 +3,14 @@ body {
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
-  line-height: 18px;
 }
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+  clear: left;
+  position: relative;
 }
 
 pre {
@@ -70,4 +71,34 @@ div {
     font-size: 12px;
     list-style: square;
   }
+}
+
+.rotate {
+  font-size: 25px;
+  background-color: #00ff00;
+  border-color: #ffffff;
+  border-style: solid;
+  height: 120px;
+  padding: 10px;
+  //transform: translateX(1000px);
+  transform: rotate(90deg);
+  transform-origin: left bottom 0;
+  width: 500px;
+  position:absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.book {
+  //display: inline-block;
+  float:left;
+  position: relative;
+  width: 140px;
+  height: 520px;
+  margin: 5px;
+  transform: translateY(-120px)
+}
+
+.bookshelf {
+  clear: left;
 }

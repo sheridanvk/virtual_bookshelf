@@ -83,7 +83,8 @@ class UsersController < ApplicationController
 
         bookshelf.books.each do |item|
           @user.books.create(title: item.fetch("book").fetch("title"),
-          isbn: item.fetch("book").fetch("isbn"))
+          isbn: item.fetch("book").fetch("isbn"),
+          author: item.fetch("book").fetch("authors").fetch("author").fetch("name"))
         end
 
         break if bookshelf.total <= bookshelf.end
