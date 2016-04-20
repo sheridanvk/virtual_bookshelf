@@ -9,8 +9,7 @@ p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-  clear: left;
-  position: relative;
+  //clear: left;
 }
 
 pre {
@@ -90,15 +89,37 @@ div {
 }
 
 .book {
-  //display: inline-block;
+  display: block;
   float:left;
   position: relative;
   width: 140px;
   height: 520px;
   margin: 5px;
-  transform: translateY(-120px)
+  margin-bottom: 100px; // makes sure that there's room for the "bookshelf underneath"
+  transform: translateY(-150px); // move up the element to take into account
+  //the fact that it was spun from its bottom left corner
+}
+
+.book:after {
+  display: block;
+  position: fixed;
+  float:left;
+	content: "";
+	clear: both;
+	height: 100px;
+  width: 100vw;
+  background: url(wood-texture.jpg);
+  //background-color: #6F4242;
+  transform: translateY(650px);
 }
 
 .bookshelf {
-  clear: left;
+}
+
+.group:after {
+	visibility: hidden;
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
 }
