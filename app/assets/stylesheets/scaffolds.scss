@@ -101,14 +101,12 @@ div {
 }
 
 .book:after {
-  display: block;
   position: fixed;
-  float:left;
 	content: "";
-	clear: both;
 	height: 100px;
-  width: 100vw;
-  background: url(wood-texture.jpg);
+  width: 110%;
+  background-image: url(wood-texture.jpg);
+  background-size:100%;
   //background-color: #6F4242;
   transform: translateY(650px);
 }
