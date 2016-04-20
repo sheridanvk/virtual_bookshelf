@@ -105,7 +105,7 @@ div {
 	content: "";
 	height: 100px;
   width: 110%;
-  background-image: url(wood-texture.jpg);
+  background-image: url(asset_path("wood-texture.jpg"));
   background-size:100%;
   //background-color: #6F4242;
   transform: translateY(650px);
