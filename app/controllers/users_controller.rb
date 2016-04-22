@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :add_goodreads]
 
   # GET /users
   # GET /users.json
@@ -28,9 +28,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        build_bookshelf
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        if @user.goodreads_id
+          build_bookshelf
+        end
+        format.html { redirect_to  action: :add_goodreads, id: @user.id}
+        # format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -62,6 +64,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_goodreads
+    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -70,7 +76,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :goodreads_id)
+      params.require(:user).permit(:name, :password, :email)
     end
 
     def build_bookshelf
