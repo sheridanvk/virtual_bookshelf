@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
   resources :users do
-    collection do
+    member do
       get 'add_goodreads'
     end
   end
-  
+
   resources :books
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -28,10 +28,12 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        if @user.goodreads_id
-          build_bookshelf
-        end
-        format.html { redirect_to  action: :add_goodreads, id: @user.id}
+        # if @user.goodreads_id
+        #   build_bookshelf
+        # end
+        test_redirect_url = get_oauth_url
+        puts "can I see the request token here create? #{@request_token}"
+        format.html { redirect_to test_redirect_url, id: @user.id}
         # format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -65,7 +67,22 @@ class UsersController < ApplicationController
   end
 
   def add_goodreads
-    
+    @request_token = session[:request_token]
+    puts "can I see the request token here add_goodreads? #{@request_token}"
+    puts "can I see the request token here add_goodreads session version? #{session[:request_token]}"
+
+    access_token = @request_token.get_access_token
+    if has_bookshelf
+      redirect_to @user
+    elsif !access_token
+      format.html { redirect_to get_oauth_url, id: @user.id}
+    else
+      @user.update(oauth_token: access_token)
+      goodreads_client_oauth = Goodreads.new(oauth_token: access_token)
+      @user.goodreads_id = goodreads_client_oauth.user_id
+      build_bookshelf
+      redirect_to @user
+    end
   end
 
   private
@@ -79,13 +96,27 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :password, :email)
     end
 
+    def get_oauth_url
+      callback_url = "#{add_goodreads_user_url(@user)}"
+      @request_token = OAuth::Consumer.new(ENV['GOODREADS_API_KEY'],ENV['GOODREADS_API_SECRET'],
+        site: "http://www.goodreads.com").get_request_token
+      puts "Request token created: #{@request_token}"
+      session[:request_token] = @request_token
+      puts "Request token session version: #{session[:request_token]}"
+      oauth_url = @request_token.authorize_url(:oauth_callback => callback_url)
+    end
+
+    def has_bookshelf
+      # Return true if the user has at least one book already
+      (Book.where user_id: @user.id).count > 0
+    end
+
     def build_bookshelf
-      goodreads_client = Goodreads::Client.new(api_key: ENV['GOODREADS_API_KEY'],api_secret: ENV['GOODREADS_API_SECRET'])
       page_number = 1
 
       loop do
-        puts page_number
-        bookshelf = goodreads_client.shelf(@user.goodreads_id, 'read', {page:page_number})
+        @goodreads_client = Goodreads::Client.new(api_key: ENV['GOODREADS_API_KEY'], api_secret: ENV['GOODREADS_API_SECRET'])
+        bookshelf = @goodreads_client.shelf(@user.goodreads_id, 'read', {page:page_number})
 
         bookshelf.books.each do |item|
           @user.books.create(title: item.fetch("book").fetch("title"),

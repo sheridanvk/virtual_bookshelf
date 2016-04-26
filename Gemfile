@@ -23,6 +23,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Goodreads gem to pull in book information
 gem 'goodreads'
+gem 'oauth'
+gem 'activerecord-session_store'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
