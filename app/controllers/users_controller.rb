@@ -67,19 +67,20 @@ class UsersController < ApplicationController
   end
 
   def add_goodreads
-    @request_token = session[:request_token]
-    puts "can I see the request token here add_goodreads? #{@request_token}"
-    puts "can I see the request token here add_goodreads session version? #{session[:request_token]}"
-
-    access_token = @request_token.get_access_token
     if has_bookshelf
       redirect_to @user
-    elsif !access_token
-      format.html { redirect_to get_oauth_url, id: @user.id}
+    elsif !params[:authorize]
+      respond_to do |format|
+        format.html {redirect_to get_oauth_url}
+      end
     else
+      # Pull the request token out of the session
+      @request_token = session[:request_token]
+      access_token = @request_token.get_access_token
+
       @user.update(oauth_token: access_token)
       goodreads_client_oauth = Goodreads.new(oauth_token: access_token)
-      @user.goodreads_id = goodreads_client_oauth.user_id
+      @user.update(goodreads_id: goodreads_client_oauth.user_id)
       build_bookshelf
       redirect_to @user
     end
@@ -97,12 +98,13 @@ class UsersController < ApplicationController
     end
 
     def get_oauth_url
+      # Build the URL to which the user will be redirected after the request token is authenticated
       callback_url = "#{add_goodreads_user_url(@user)}"
       @request_token = OAuth::Consumer.new(ENV['GOODREADS_API_KEY'],ENV['GOODREADS_API_SECRET'],
         site: "http://www.goodreads.com").get_request_token
-      puts "Request token created: #{@request_token}"
+
+      # Put the request token in the session for use later
       session[:request_token] = @request_token
-      puts "Request token session version: #{session[:request_token]}"
       oauth_url = @request_token.authorize_url(:oauth_callback => callback_url)
     end
 
@@ -112,6 +114,7 @@ class UsersController < ApplicationController
     end
 
     def build_bookshelf
+      # Initialise page number, which we'll use to iterate through the Goodreads paginated shelf data
       page_number = 1
 
       loop do
@@ -119,9 +122,23 @@ class UsersController < ApplicationController
         bookshelf = @goodreads_client.shelf(@user.goodreads_id, 'read', {page:page_number})
 
         bookshelf.books.each do |item|
-          @user.books.create(title: item.fetch("book").fetch("title"),
-          isbn: item.fetch("book").fetch("isbn"),
-          author: item.fetch("book").fetch("authors").fetch("author").fetch("name"))
+          # Fetch the title and split it into title and subtitle where relevant
+          book_full_title = item.fetch("book").fetch("title").partition(/[:(]/)
+          book_title = book_full_title[0].strip
+          if book_full_title.length > 1
+            # Remove any stray parens and whitespace from subtitle, which is stored in the third element of the title array
+            book_subtitle = (book_full_title[2].gsub /[:)(]/, "").strip
+          end
+          book_isbn = item.fetch("book").fetch("isbn")
+          book_author = item.fetch("book").fetch("authors").fetch("author").fetch("name")
+
+          book = @user.books.create(title: book_title,
+          isbn: book_isbn,
+          author: book_author)
+
+          if book_subtitle
+            book.update(subtitle: book_subtitle)
+          end
         end
 
         break if bookshelf.total <= bookshelf.end

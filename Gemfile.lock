@@ -179,6 +179,7 @@ DEPENDENCIES
   goodreads
   jbuilder (~> 2.0)
   jquery-rails
+  nokogiri
   oauth
   pg (= 0.17.1)
   rails (= 4.2.6)
