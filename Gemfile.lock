@@ -30,6 +30,10 @@ GEM
       activemodel (= 4.2.6)
       activesupport (= 4.2.6)
       arel (~> 6.0)
+    activerecord-session_store (0.1.2)
+      actionpack (>= 4.0.0, < 5)
+      activerecord (>= 4.0.0, < 5)
+      railties (>= 4.0.0, < 5)
     activesupport (4.2.6)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -37,6 +41,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.3)
+    bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -81,7 +86,7 @@ GEM
     mime-types (2.99.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
-    multi_json (1.11.2)
+    multi_json (1.11.3)
     netrc (0.11.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
@@ -167,11 +172,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-session_store
+  bcrypt (~> 3.1.7)
   byebug
   coffee-rails (~> 4.1.0)
   goodreads
   jbuilder (~> 2.0)
   jquery-rails
+  nokogiri
+  oauth
   pg (= 0.17.1)
   rails (= 4.2.6)
   rails_12factor (= 0.0.2)

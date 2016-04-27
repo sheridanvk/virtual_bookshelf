@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :add_goodreads]
 
   # GET /users
   # GET /users.json
@@ -28,9 +28,13 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        build_bookshelf
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        # if @user.goodreads_id
+        #   build_bookshelf
+        # end
+        test_redirect_url = get_oauth_url
+        puts "can I see the request token here create? #{@request_token}"
+        format.html { redirect_to test_redirect_url, id: @user.id}
+        # format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -62,6 +66,26 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_goodreads
+    if has_bookshelf
+      redirect_to @user
+    elsif !params[:authorize]
+      respond_to do |format|
+        format.html {redirect_to get_oauth_url}
+      end
+    else
+      # Pull the request token out of the session
+      @request_token = session[:request_token]
+      access_token = @request_token.get_access_token
+
+      @user.update(oauth_token: access_token)
+      goodreads_client_oauth = Goodreads.new(oauth_token: access_token)
+      @user.update(goodreads_id: goodreads_client_oauth.user_id)
+      build_bookshelf
+      redirect_to @user
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -70,21 +94,51 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :goodreads_id)
+      params.require(:user).permit(:name, :password, :email)
+    end
+
+    def get_oauth_url
+      # Build the URL to which the user will be redirected after the request token is authenticated
+      callback_url = "#{add_goodreads_user_url(@user)}"
+      @request_token = OAuth::Consumer.new(ENV['GOODREADS_API_KEY'],ENV['GOODREADS_API_SECRET'],
+        site: "http://www.goodreads.com").get_request_token
+
+      # Put the request token in the session for use later
+      session[:request_token] = @request_token
+      oauth_url = @request_token.authorize_url(:oauth_callback => callback_url)
+    end
+
+    def has_bookshelf
+      # Return true if the user has at least one book already
+      (Book.where user_id: @user.id).count > 0
     end
 
     def build_bookshelf
-      goodreads_client = Goodreads::Client.new(api_key: ENV['GOODREADS_API_KEY'],api_secret: ENV['GOODREADS_API_SECRET'])
+      # Initialise page number, which we'll use to iterate through the Goodreads paginated shelf data
       page_number = 1
 
       loop do
-        puts page_number
-        bookshelf = goodreads_client.shelf(@user.goodreads_id, 'read', {page:page_number})
+        @goodreads_client = Goodreads::Client.new(api_key: ENV['GOODREADS_API_KEY'], api_secret: ENV['GOODREADS_API_SECRET'])
+        bookshelf = @goodreads_client.shelf(@user.goodreads_id, 'read', {page:page_number})
 
         bookshelf.books.each do |item|
-          @user.books.create(title: item.fetch("book").fetch("title"),
-          isbn: item.fetch("book").fetch("isbn"),
-          author: item.fetch("book").fetch("authors").fetch("author").fetch("name"))
+          # Fetch the title and split it into title and subtitle where relevant
+          book_full_title = item.fetch("book").fetch("title").partition(/[:(]/)
+          book_title = book_full_title[0].strip
+          if book_full_title.length > 1
+            # Remove any stray parens and whitespace from subtitle, which is stored in the third element of the title array
+            book_subtitle = (book_full_title[2].gsub /[:)(]/, "").strip
+          end
+          book_isbn = item.fetch("book").fetch("isbn")
+          book_author = item.fetch("book").fetch("authors").fetch("author").fetch("name")
+
+          book = @user.books.create(title: book_title,
+          isbn: book_isbn,
+          author: book_author)
+
+          if book_subtitle
+            book.update(subtitle: book_subtitle)
+          end
         end
 
         break if bookshelf.total <= bookshelf.end

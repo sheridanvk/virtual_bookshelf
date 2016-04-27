@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413191610) do
+ActiveRecord::Schema.define(version: 20160426165111) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -20,15 +20,30 @@ ActiveRecord::Schema.define(version: 20160413191610) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "author"
+    t.string   "subtitle"
+    t.string   "colour"
   end
 
   add_index "books", ["user_id"], name: "index_books_on_user_id"
 
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.integer  "goodreads_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
+    t.string   "email"
+    t.string   "oauth_token"
   end
 
 end
