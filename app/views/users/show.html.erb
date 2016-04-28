@@ -1,29 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Goodreads:</strong>
-  <%= @user.goodreads_id %>
-</p>
-
 <div class="bookshelf group">
   <% @user.books.each do |book| %>
-    <div class="book">
-      <div class="rotate">
-        <%= book.title %> <br/>
-        <%= book.author %>
+    <div class="book2" style="background-color:<%=book.colour%>;
+    height: <%=book.height%>px; width: <%= book.width%>px">
+      <div class="rotate2" style="width: <%=book.height%>px;">
+        <span class="title"><%= book.title %></span> <br/>
+        <span class="author"><%= book.author %></span>
+      </div>
+      <div class="shelf" style="width: <%= book.width+20%>px">
       </div>
     </div>
   <% end %>
 </div>
 
 <p>
-  <br/>
-  <br/>
   <%= link_to 'Edit', edit_user_path(@user) %> |
   <%= link_to 'Back', users_path %>
 </p>

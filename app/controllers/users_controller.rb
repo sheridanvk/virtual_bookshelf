@@ -132,9 +132,16 @@ class UsersController < ApplicationController
           book_isbn = item.fetch("book").fetch("isbn")
           book_author = item.fetch("book").fetch("authors").fetch("author").fetch("name")
 
+          book_colour = set_book_colour
+          book_height = set_book_height
+          book_width = set_book_width
+
           book = @user.books.create(title: book_title,
           isbn: book_isbn,
-          author: book_author)
+          author: book_author,
+          colour: book_colour,
+          height: book_height,
+          width: book_width)
 
           if book_subtitle
             book.update(subtitle: book_subtitle)
@@ -144,5 +151,20 @@ class UsersController < ApplicationController
         break if bookshelf.total <= bookshelf.end
         page_number += 1
       end
+    end
+
+    def set_book_colour
+      colours = ["#aa5939","#803315","#551800","#ffc2aa","#d4886a"]
+      book_colour = colours.sample
+    end
+
+    def set_book_height
+      heights = [300,350,400,450,500]
+      book_height = heights.sample
+    end
+
+    def set_book_width
+      widths = [100,110,120,130,140,150]
+      book_width = widths.sample
     end
 end
