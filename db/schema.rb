@@ -11,19 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428165534) do
+ActiveRecord::Schema.define(version: 20160428172101) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
     t.string   "isbn"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "author"
     t.string   "subtitle"
-    t.string   "colour"
+    t.string   "spine_colour"
     t.integer  "height"
     t.integer  "width"
+    t.string   "font_colour"
   end
 
   add_index "books", ["user_id"], name: "index_books_on_user_id"

@@ -132,14 +132,16 @@ class UsersController < ApplicationController
           book_isbn = item.fetch("book").fetch("isbn")
           book_author = item.fetch("book").fetch("authors").fetch("author").fetch("name")
 
-          book_colour = set_book_colour
+          book_spine_colour = set_book_colours[0]
+          book_font_colour = set_book_colours[1]
           book_height = set_book_height
           book_width = set_book_width
 
           book = @user.books.create(title: book_title,
           isbn: book_isbn,
           author: book_author,
-          colour: book_colour,
+          spine_colour: book_spine_colour,
+          font_colour: book_font_colour,
           height: book_height,
           width: book_width)
 
@@ -153,9 +155,14 @@ class UsersController < ApplicationController
       end
     end
 
-    def set_book_colour
+    def set_book_colours
       colours = ["#aa5939","#803315","#551800","#ffc2aa","#d4886a"]
-      book_colour = colours.sample
+      spine_colour = colours.sample
+
+      # Create a Paleta object to get the complementary colours
+      paleta_colour = Paleta::Color.new(:hex, spine_colour)
+      font_colour = "#"+paleta_colour.complement!.hex
+      book_colours = [spine_colour,font_colour]
     end
 
     def set_book_height
