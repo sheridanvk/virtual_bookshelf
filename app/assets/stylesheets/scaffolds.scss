@@ -72,108 +72,7 @@ div {
   }
 }
 
-.rotate {
-  display: block;
-  float:left;
-  position: relative;
-  font-size: 25px;
-  /*background-image:
-    linear-gradient(
-      to bottom,
-      #cccc00,
-      yellow 10%,
-      yellow 90%,
-      #cccc00
-    );*/
-  border-color: #ffffff;
-  border-style: solid;
-  height: 120px;
-  width: 500px;
-  padding: 10px;
-  //transform: translateX(1000px);
-  transform: translateX(-50%) translateY(-50%) rotate(-90deg);
-  position:absolute;
-  top: 0px;
-  left: 0px;
-}
-
-.book-short {
-  display: block;
-  float:left;
-  font-size: 25px;
-  /*background-image:
-    linear-gradient(
-      to bottom,
-      #cccc00,
-      yellow 10%,
-      yellow 90%,
-      #cccc00
-    );*/
-  border-color: #ffffff;
-  border-style: solid;
-  height: 120px;
-  width: 300px;
-  padding: 10px;
-  //transform: translateX(1000px);
-  transform: rotate(90deg);
-  transform-origin: left bottom 0;
-  bottom: 0;
-  left: 0px;
-}
-.book-normal {
-  display: block;
-  float:left;
-  font-size: 25px;
-  background-image:
-    linear-gradient(
-      to bottom,
-      rgba(50,50,50,1),
-      rgba(255,0,0,0) 5%,
-      rgba(255,0,0,0) 95%,
-      rgba(100,100,100,1)
-    );
-  border-color: #ffffff;
-  border-style: solid;
-  height: 120px;
-  width: 500px;
-  padding: 10px;
-  //transform: translateX(1000px);
-  transform: rotate(90deg);
-  transform-origin: left bottom 0;
-//  position:absolute;
-  bottom: 0;
-  left: 0px;
-}
-//.book-tall
-//.book-wide
-//.book-skinny
-
 .book {
-  display: block;
-  float:left;
-  //position: relative;
-  width: 140px;
-  height: 520px;
-  margin: 5px;
-  margin-bottom: 100px; // makes sure that there's room for the "bookshelf underneath"
-  transform: translateY(-150px); // move up the element to take into account
-  //the fact that it was spun from its bottom left corner
-}
-
-.book:after {
-  position: fixed;
-  float: left;
-	content: "";
-	height: 100px;
-  width: 110%;
-  background-image: url(asset_path("wood-texture.jpg"));
-  background-size:100%;
-  //background-color: #6F4242;
-//  transform: translateY(650px);
-  transform: translateX(-500px);
-}
-
-.book2 {
   position: relative;
   display: inline-block;
   float: bottom;
@@ -181,15 +80,17 @@ div {
   background-image:
     linear-gradient(
       to right,
-      rgba(50,50,50,1),
+      rgba(50,50,50,0.2),
       rgba(255,0,0,0) 10%,
+      rgba(50,50,50,0.2) 50%,
       rgba(255,0,0,0) 90%,
-      rgba(100,100,100,1)
+      rgba(50,50,50,0.2)
     );
-  margin-bottom: 100px; // provides room for the bookshelf
+  border-radius: 4px;
+  margin-bottom: 120px; // provides room for the bookshelf
 }
 
-.rotate2 {
+.rotate {
   transform: translateX(-50%) translateY(-50%) rotate(90deg);
   text-align:center;
   position: absolute;
@@ -204,6 +105,18 @@ div {
   position: absolute;
   top: 100%;
   left: -10px;
+}
+
+.book::before {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 20%;
+  width: inherit;
+  height: 80px;
+  background: inherit;
+  left: 0;
+  top: -12px;
 }
 
 .title {

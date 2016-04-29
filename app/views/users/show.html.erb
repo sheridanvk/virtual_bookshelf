@@ -2,9 +2,9 @@
 
 <div class="bookshelf group">
   <% @user.books.each do |book| %>
-    <div class="book2" style="background-color:<%=book.spine_colour%>;
+    <div class="book" style="background-color:<%=book.spine_colour%>;
     height: <%=book.height%>px; width: <%= book.width%>px">
-      <div class="rotate2" style="width: <%=book.height%>px; color:<%=book.font_colour%>">
+      <div class="rotate" style="width: <%=book.height%>px; color:<%=book.font_colour%>">
         <span class="title"><%= book.title %></span> <br/>
         <span class="author"><%= book.author %></span>
       </div>
