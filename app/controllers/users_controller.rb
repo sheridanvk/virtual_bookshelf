@@ -156,17 +156,18 @@ class UsersController < ApplicationController
     end
 
     def set_book_colours
-      colours = ["#805216","#803315","#D4A76A","#ffc2aa","#d4886a"]
+      colours = ["#600060","#710071","#960096","#A60FA6","#810081"]
       spine_colour = colours.sample
 
       # Create a Paleta object to get the complementary colours
-      paleta_colour = Paleta::Color.new(:hex, spine_colour)
-      font_colour = "#"+paleta_colour.complement!.hex
+    #  paleta_colour = Paleta::Color.new(:hex, spine_colour)
+    #  font_colour = "#"+paleta_colour.complement!.hex
+      font_colour = "#D0f616"
       book_colours = [spine_colour,font_colour]
     end
 
     def set_book_height
-      heights = [300,350,400,450,500]
+      heights = [400,425,450,475,500]
       book_height = heights.sample
     end
 

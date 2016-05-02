@@ -2,13 +2,14 @@
 
 <div class="bookshelf group">
   <% @user.books.each do |book| %>
-    <div class="book" style="background-color:<%=book.spine_colour%>;
+    <div class="book" id=<%=book.id%> style="background-color:<%=book.spine_colour%>;
     height: <%=book.height%>px; width: <%= book.width%>px">
+    <!-- TODO: Check that exposing book IDs isn't a terrible idea -->
       <div class="rotate" style="width: <%=book.height%>px; color:<%=book.font_colour%>">
         <span class="title"><%= book.title %></span> <br/>
         <span class="author"><%= book.author %></span>
       </div>
-      <div class="shelf" style="width: <%= book.width+20%>px">
+      <div class="shelf" style="width: <%= book.width%>px">
       </div>
     </div>
   <% end %>

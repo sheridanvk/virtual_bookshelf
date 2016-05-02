@@ -1,3 +1,72 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.book {
+  position: relative;
+  display: inline-block;
+  float: bottom;
+  //margin: 0 5px;
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(50,50,50,0.2),
+      rgba(255,0,0,0) 10%,
+      rgba(50,50,50,0.2) 50%,
+      rgba(255,0,0,0) 90%,
+      rgba(50,50,50,0.2)
+    );
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-bottom: 120px; // provides room for the bookshelf
+  margin-right: -5px; // removes gaps between books due to inline-block settings
+}
+
+.rotate {
+  transform: translateX(-50%) translateY(-50%) rotate(90deg);
+  text-align:center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.shelf {
+  height: 100px;
+  background-image: url(asset_path("wood-texture.jpg"));
+  background-size:100%;
+  position: absolute;
+  top: 100%;
+  //left: -10px;
+}
+
+.book::before {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 20%;
+  width: inherit;
+  height: 80px;
+  background: inherit;
+//  left: 0;
+  top: -12px;
+}
+
+.title {
+  font-size: 30px;
+}
+
+.author {
+  font-size: 20px;
+}
+
+.bookshelf {
+}
+
+.group:after {
+	visibility: hidden;
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
+}
