@@ -167,7 +167,7 @@ class UsersController < ApplicationController
     end
 
     def set_book_height
-      heights = [400,425,450,475,500]
+      heights = [450,460,470,480,490,500]
       book_height = heights.sample
     end
 

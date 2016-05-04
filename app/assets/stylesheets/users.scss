@@ -7,10 +7,9 @@
   position: relative;
   display: inline-block;
   float: bottom;
-  //margin: 0 5px;
-  border-radius: 4px;
   margin-bottom: 120px; // provides room underneath the bookshelf for the next row
   margin-right: -5px; // removes gaps between books due to inline-block settings
+  padding: 8px;
 }
 
 .rotate {
@@ -19,14 +18,17 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  text-shadow: 1px 1px #220F22;
+  opacity: 0.8; // makes the text look a little worn
 }
 
 .book::before {
   content: "";
   display: block;
   position: absolute;
+  left: 0;
   border-radius: 20%;
-  width: inherit;
+  width: 100%;
   height: 80px;
   background: inherit;
   background-image:
@@ -40,13 +42,15 @@
     );
     z-index: -1;
 //  left: 0;
-  top: -12px;
+  top: -15px;
 }
 
 .book::after {
   content: "";
   display: block;
   position: absolute;
+  left: 0;
+  top: 0;
   background-image:
     linear-gradient(
       to right,
@@ -56,27 +60,28 @@
       rgba(255,0,0,0) 90%,
       rgba(50,50,50,0.3)
     );
-  width: inherit;
-  height: inherit;
+  width: 100%;
+  height: 100%;
 }
 
 
 .shelf {
-  height: 100px;
+  height: 80px;
   background-color: #220F22;
   background-size:100%;
   position: absolute;
   top: 100%;
-  left: -40px;
   border-radius: 4px;
 }
 
 .title {
   font-size: 30px;
+  font-family: 'Gentium Book Basic';
 }
 
 .author {
   font-size: 20px;
+  font-family: 'Lato';
 }
 
 .bookshelf {
