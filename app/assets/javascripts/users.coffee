@@ -15,7 +15,7 @@ font_size_check = (element) ->
   while element.offsetWidth - text_div.offsetHeight < 10
     console.log "old offsetHeight: " + text_div.offsetHeight
     # Adjust the font size proportionally to how much it's overflowed
-    adjust_factor = element.offsetWidth/(text_div.offsetHeight+50)
+    adjust_factor = element.offsetWidth/(text_div.offsetHeight+10)
     current_font_size = $("#" + element.id + " .title").css 'font-size'
     new_font_size = Math.floor(adjust_factor*35)+"px"
     console.log element.id
