@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'sessions/new'
+
+  # Remove model name from the URL
+  resources :users, path: ''
+  get '/:friendly_id', to: 'users#show'
+
   resources :users do
     member do
       get 'add_goodreads'
@@ -15,6 +21,10 @@ Rails.application.routes.draw do
 
   get 'signup' => 'users#new'
   root 'users#new'
+
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
