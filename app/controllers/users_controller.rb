@@ -28,12 +28,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        # if @user.goodreads_id
-        #   build_bookshelf
-        # end
-        test_redirect_url = get_oauth_url
+        log_in @user
         puts "can I see the request token here create? #{@request_token}"
-        format.html { redirect_to test_redirect_url, id: @user.id}
+        format.html { redirect_to get_oauth_url, id: @user.id}
         # format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

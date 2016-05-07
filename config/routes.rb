@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'sessions#new'
 
   get 'signup' => 'users#new'
+  get 'users' => 'users#index' # adding user list back in for testing
 
   get 'sessions/new'
   get    'login'   => 'sessions#new'
