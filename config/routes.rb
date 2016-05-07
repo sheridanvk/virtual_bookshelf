@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
+
+  root 'sessions#new'
+
+  get 'signup' => 'users#new'
+
   get 'sessions/new'
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 
   # Remove model name from the URL
   resources :users, path: ''
@@ -19,12 +27,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
 
-  get 'signup' => 'users#new'
-  root 'users#new'
 
-  get    'login'   => 'sessions#new'
-  post   'login'   => 'sessions#create'
-  delete 'logout'  => 'sessions#destroy'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

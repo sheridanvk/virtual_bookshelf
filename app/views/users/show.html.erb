@@ -17,6 +17,11 @@
 </div>
 
 <p>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Back', users_path %>
+  <% if logged_in? %>
+    <%= link_to 'Edit', edit_user_path(@user) %> |
+    <%= link_to 'Log out', logout_path, method: :delete  %>
+  <% else %>
+    <%= link_to 'Create your own bookshelf', new_user_path %> |
+    <%= link_to 'Log in', login_path %>
+  <% end %>
 </p>
