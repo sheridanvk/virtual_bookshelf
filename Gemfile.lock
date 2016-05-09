@@ -45,7 +45,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    byebug (8.2.4)
+    byebug (8.2.5)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -53,12 +53,14 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
-    concurrent-ruby (1.0.1)
+    concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
     domain_name (0.5.20160310)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     execjs (2.6.0)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     goodreads (0.4.3)
@@ -86,11 +88,12 @@ GEM
     mime-types (2.99.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
-    multi_json (1.11.3)
+    multi_json (1.12.0)
     netrc (0.11.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     oauth (0.5.1)
+    paleta (0.3.0)
     pg (0.17.1)
     rack (1.6.4)
     rack-test (0.6.3)
@@ -176,11 +179,13 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
   coffee-rails (~> 4.1.0)
+  friendly_id
   goodreads
   jbuilder (~> 2.0)
   jquery-rails
   nokogiri
   oauth
+  paleta
   pg (= 0.17.1)
   rails (= 4.2.6)
   rails_12factor (= 0.0.2)

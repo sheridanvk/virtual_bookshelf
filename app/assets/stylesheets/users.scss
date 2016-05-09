@@ -1,3 +1,98 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.book {
+  position: relative;
+  display: inline-block;
+  float: bottom;
+  margin-bottom: 120px; // provides room underneath the bookshelf for the next row
+  margin-right: -5px; // removes gaps between books due to inline-block settings
+  padding: 8px;
+}
+
+.rotate {
+  transform: translateX(-50%) translateY(-50%) rotate(90deg);
+  text-align:center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-shadow: 1px 1px #220F22;
+  opacity: 0.9; // makes the text look a little worn
+}
+
+.book::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  border-radius: 20%;
+  width: 100%;
+  height: 80px;
+  background: inherit;
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(50,50,50,0.3),
+      rgba(255,0,0,0) 10%,
+      rgba(50,50,50,0.3) 50%,
+      rgba(255,0,0,0) 90%,
+      rgba(50,50,50,0.3)
+    );
+    z-index: -1;
+//  left: 0;
+  top: -15px;
+}
+
+.book::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(50,50,50,0.3),
+      rgba(255,0,0,0) 10%,
+      rgba(50,50,50,0.3) 50%,
+      rgba(255,0,0,0) 90%,
+      rgba(50,50,50,0.3)
+    );
+  width: 100%;
+  height: 100%;
+}
+
+
+.shelf {
+  height: 80px;
+  background-color: #220F22;
+  background-size:100%;
+  position: absolute;
+  top: 100%;
+  border-radius: 4px;
+}
+
+.title {
+  font-size: 35px;
+  font-family: 'Merriweather';
+}
+
+.author {
+  font-size: 20px;
+  font-family: 'Lato';
+}
+
+.bookshelf {
+  margin: 40px;
+  text-align: center;
+}
+
+.group:after {
+	visibility: hidden;
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
+}

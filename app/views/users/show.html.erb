@@ -1,29 +1,27 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Goodreads:</strong>
-  <%= @user.goodreads_id %>
-</p>
-
 <div class="bookshelf group">
   <% @user.books.each do |book| %>
-    <div class="book">
-      <div class="rotate">
-        <%= book.title %> <br/>
-        <%= book.author %>
+    <div class="book" id=<%=book.id%> style="background-color:<%=book.spine_colour%>;
+    height: <%=book.height%>px; width: <%= book.width%>px">
+    <!-- TODO: Check that exposing book IDs isn't a terrible idea -->
+      <div class="rotate" style="width: <%=book.height%>px; color:<%=book.font_colour%>">
+        <span class="title"><%= book.title %></span> <br/>
+        <span class="author"><%= book.author %></span>
+      </div>
+      <!-- TODO: make the following positioning calculations less awful and brittle -->
+      <div class="shelf" style="width: <%= book.width+80%>px;
+      left: -<%= 32%>px;">
       </div>
     </div>
   <% end %>
 </div>
 
 <p>
-  <br/>
-  <br/>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Back', users_path %>
+  <% if logged_in? %>
+    <%= link_to 'Edit', edit_user_path(@user) %> |
+    <%= link_to 'Log out', logout_path, method: :delete  %>
+  <% else %>
+    <%= link_to 'Create your own bookshelf', new_user_path %> |
+    <%= link_to 'Log in', login_path %>
+  <% end %>
 </p>

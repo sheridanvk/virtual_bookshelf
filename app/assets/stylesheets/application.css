@@ -12,4 +12,9 @@
  *
  *= require_tree .
  *= require_self
+
+ @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+ @import url(https://fonts.googleapis.com/css?family=Lobster);
+ @import url(https://fonts.googleapis.com/css?family=Candal);
  */
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans|Gentium+Book+Basic|Lato|Merriweather)
