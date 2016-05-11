@@ -4,7 +4,7 @@
     <div class="book" id=<%=book.id%> style="background-color:<%=book.spine_colour%>;
     height: <%=book.height%>px; width: <%= book.width%>px">
     <!-- TODO: Check that exposing book IDs isn't a terrible idea -->
-      <div class="rotate" style="width: <%=book.height%>px; color:<%=book.font_colour%>">
+      <div class="rotate" style="color:<%=book.font_colour%>; width: <%=book.height%>px">
         <span class="title"><%= book.title %></span> <br/>
         <span class="author"><%= book.author %></span>
       </div>
