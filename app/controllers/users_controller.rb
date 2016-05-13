@@ -129,10 +129,15 @@ class UsersController < ApplicationController
           book_isbn = item.fetch("book").fetch("isbn")
           book_author = item.fetch("book").fetch("authors").fetch("author").fetch("name")
 
+          book_pages_check = item.fetch("book").fetch("num_pages")
+          book_pages = book_pages_check.presence || "250"
+          book_pages = book_pages.to_i
+
           book_spine_colour = set_book_colours[0]
           book_font_colour = set_book_colours[1]
           book_height = set_book_height
           book_width = set_book_width
+          book_text_orientation = set_book_text_orientation(book_title)
 
           book = @user.books.create(title: book_title,
           isbn: book_isbn,
@@ -140,7 +145,9 @@ class UsersController < ApplicationController
           spine_colour: book_spine_colour,
           font_colour: book_font_colour,
           height: book_height,
-          width: book_width)
+          width: book_width,
+          page_count: book_pages,
+          text_orientation: book_text_orientation)
 
           if book_subtitle
             book.update(subtitle: book_subtitle)
@@ -171,5 +178,16 @@ class UsersController < ApplicationController
     def set_book_width
       widths = [100,110,120,130,140,150]
       book_width = widths.sample
+    end
+
+    def set_book_text_orientation(title)
+      #TODO add rotated_title as a layout option
+      if title.length <= 20 # ensuring that long titles don't get written horizontally.
+        #TODO decide if I should also add a max word length on this option
+        orientation = ["standard","rotated_all"]
+      else
+        orientation = ["rotated_all"]
+      end
+      text_orientation = orientation.sample
     end
 end
