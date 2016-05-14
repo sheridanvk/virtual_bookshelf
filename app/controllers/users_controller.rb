@@ -160,7 +160,8 @@ class UsersController < ApplicationController
     end
 
     def set_book_colours
-      colours = ["#600060","#710071","#960096","#A60FA6","#810081"]
+    # purples  colours = ["#600060","#710071","#960096","#A60FA6","#810081"]
+    colours = ["#B74E54","#683A85","#256A98","#85A13F","#CFBB23"]
       spine_colour = colours.sample
 
       # Create a Paleta object to get the complementary colours
