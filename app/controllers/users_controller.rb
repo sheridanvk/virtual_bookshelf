@@ -167,7 +167,7 @@ class UsersController < ApplicationController
       # Create a Paleta object to get the complementary colours
     #  paleta_colour = Paleta::Color.new(:hex, spine_colour)
     #  font_colour = "#"+paleta_colour.complement!.hex
-      font_colour = "#D0f616"
+      font_colour = "#FCFBE3"
       book_colours = [spine_colour,font_colour]
     end
 
