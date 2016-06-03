@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .login_or_signup {
-  background: url(/assets/books-large-image.jpg) no-repeat center center fixed;
+  background: url(asset_path("books-large-image.jpg")) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
