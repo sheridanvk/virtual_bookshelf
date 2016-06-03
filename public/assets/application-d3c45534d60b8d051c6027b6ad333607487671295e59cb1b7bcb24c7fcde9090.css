@@ -1,0 +1,225 @@
+/* line 1, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+}
+
+/* line 8, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 15, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* line 21, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+a {
+  color: #000;
+}
+/* line 24, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+a:visited {
+  color: #666;
+}
+/* line 28, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+a:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+/* line 35, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 40, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+#notice {
+  color: green;
+}
+
+/* line 44, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+/* line 50, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+/* line 58, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+/* line 69, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+/* line 75, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/scaffolds.scss */
+.container {
+  background-color: #ffffff;
+}
+/* line 5, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/sessions.scss */
+.login_or_signup {
+  background: url("/assets/books-large-image-6f0dbe4bcf390f855734a4272a28b257a7b487f8af2c2b7698ad31f1882a980e.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/* line 7, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/users.scss */
+.book {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 120px;
+  margin-right: -5px;
+  box-sizing: border-box;
+  z-index: 10;
+}
+
+/* line 18, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/users.scss */
+.spine_text {
+  text-shadow: 1px 1px #220F22;
+  opacity: 0.9;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 35px;
+}
+
+/* line 31, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/users.scss */
+.rotate {
+  transform: translateX(-50%) translateY(-50%) rotate(90deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: inherit;
+  height: inherit;
+  padding: 8px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* line 45, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/users.scss */
+.standard {
+  position: absolute;
+  top: 25%;
+  width: inherit;
+  height: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* line 57, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/users.scss */
+.book::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  border-radius: 30px/8px;
+  width: 100%;
+  height: 80px;
+  background: inherit;
+  background-image: linear-gradient(to right, rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.5) 10%, rgba(50, 50, 50, 0.3) 50%, rgba(255, 0, 0, 0) 90%, rgba(50, 50, 50, 0.3));
+  z-index: 1;
+  top: -15px;
+}
+
+/* line 80, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/users.scss */
+.book::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-image: linear-gradient(to right, rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.5) 10%, rgba(50, 50, 50, 0.3) 50%, rgba(255, 0, 0, 0) 90%, rgba(50, 50, 50, 0.3));
+  width: 100%;
+  height: 100%;
+}
+
+/* line 100, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/users.scss */
+.shelf {
+  height: 80px;
+  background-color: #220F22;
+  background-size: 100%;
+  position: absolute;
+  top: 100%;
+  border-radius: 4px;
+  width: calc(100% + 60px);
+  left: -30px;
+}
+
+/* line 114, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/users.scss */
+.title {
+  display: inline-block;
+  font-size: 100%;
+  font-family: 'Merriweather';
+  box-sizing: border-box;
+}
+
+/* line 121, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/users.scss */
+.author {
+  display: inline-block;
+  font-family: 'Lato';
+  font-size: 60%;
+  vertical-align: bottom;
+  box-sizing: border-box;
+}
+
+/* line 129, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/users.scss */
+.bookshelf {
+  margin: 40px;
+  text-align: center;
+}
+
+/* line 134, /Users/skates/Git/virtual_bookshelf/app/assets/stylesheets/users.scss */
+.group:after {
+  visibility: hidden;
+  display: block;
+  content: "";
+  clear: both;
+  height: 0;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+
+ @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+ @import url(https://fonts.googleapis.com/css?family=Lobster);
+ @import url(https://fonts.googleapis.com/css?family=Candal);
+ */
+  /*@import url(https://fonts.googleapis.com/css?family=Open+Sans|Gentium+Book+Basic|Lato|Merriweather)*/
+
