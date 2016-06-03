@@ -19,4 +19,8 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
   end
+
+  def body_class
+    content_for(:body_class) || ""
+  end
 end

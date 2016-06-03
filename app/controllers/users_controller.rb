@@ -126,12 +126,10 @@ class UsersController < ApplicationController
             # Remove any stray parens and whitespace from subtitle, which is stored in the third element of the title array
             book_subtitle = (book_full_title[2].gsub /[:)(]/, "").strip
           end
-          book_isbn = item.fetch("book").fetch("isbn")
+          book_isbn = item.fetch("book").fetch("isbn") || item.fetch("book").fetch("isbn")
           book_author = item.fetch("book").fetch("authors").fetch("author").fetch("name")
 
           book_pages_check = item.fetch("book").fetch("num_pages")
-          book_pages = book_pages_check.presence || "250"
-          book_pages = book_pages.to_i
 
           book_spine_colour = set_book_colours[0]
           book_font_colour = set_book_colours[1]
@@ -146,7 +144,6 @@ class UsersController < ApplicationController
           font_colour: book_font_colour,
           height: book_height,
           width: book_width,
-          page_count: book_pages,
           text_orientation: book_text_orientation)
 
           if book_subtitle

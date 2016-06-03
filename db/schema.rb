@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20160512190519) do
     t.integer  "width"
     t.string   "font_colour"
     t.string   "title_size",       default: "30px"
-    t.integer  "page_count"
     t.string   "text_orientation"
   end
 
