@@ -2,7 +2,7 @@
 <div class="bookshelf group">
   <% @user.books.each do |book| %>
     <div class="book" id=<%=book.id%> style="background-color:<%=book.spine_colour%>;
-    height: <%=(book.height/450)*75%>vh; width: <%= book.width%>px">
+    height: <%=(book.height/450)*40%>em; width: <%= book.width%>px">
       <div class="spine_text" style="color:<%=book.font_colour%>">
         <% if book.text_orientation == "rotated_all"%>
           <div class="rotate" style="width: <%=book.height%>px">
@@ -16,7 +16,6 @@
           </div>
         <% end %>
       </div>
-      <!-- TODO: make the following positioning calculations less awful and brittle -->
       <div class="shelf">
       </div>
     </div>
