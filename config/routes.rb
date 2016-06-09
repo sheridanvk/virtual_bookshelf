@@ -15,9 +15,9 @@ Rails.application.routes.draw do
   resources :users, path: ''
   get '/:friendly_id', to: 'users#show'
 
-  resources :users do
+  resources :sessions do
     member do
-      get 'add_goodreads'
+      get 'check_goodreads_authentication'
     end
   end
 

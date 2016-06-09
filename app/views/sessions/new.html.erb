@@ -1,9 +1,13 @@
 
 <% content_for :body_class do %>login_or_signup<% end %>
 
-<% provide(:title, "Log in") %>
-<h1>Log in</h1>
+<h1>Bring your ebooks back into the real world with Virtual Bookcase</h1>
 
+<a href="<%=get_oauth_url%>">
+  <%= image_tag("goodreads-login-button.png", :alt => "goodreads login button") %>
+</a>
+
+<h2>Already have a Virtual Bookcase account? Welcome back!</h2>
 <div>
   <div>
     <%= form_for(:session, url: login_path) do |f| %>
@@ -16,7 +20,5 @@
 
       <%= f.submit "Log in" %>
     <% end %>
-
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
   </div>
 </div>
