@@ -11,14 +11,28 @@
 <div>
   <div>
     <%= form_for(:session, url: login_path) do |f| %>
+      <div class="field">
+        <div class="label">
+          <%= f.label :email %>
+        </div>
+        <div class="input">
+          <%= f.email_field :email%>
+        </div>
+      </div>
 
-      <%= f.label :email %>
-      <%= f.email_field :email%>
+      <div class="field">
+        <div class="label">
+          <%= f.label :password %>
+        </div>
+        <div class="input">
+          <%= f.password_field :password %>
+        </div>
+      </div>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+      <div class="actions">
+        <%= f.submit "Log in" %>
+      </div>
 
-      <%= f.submit "Log in" %>
     <% end %>
   </div>
 </div>
